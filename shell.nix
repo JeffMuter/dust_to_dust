@@ -4,6 +4,7 @@ pkgs.mkShell {
     clang
     glibc.dev
     raylib
+    pkg-config
   ];
   
   shellHook = ''
