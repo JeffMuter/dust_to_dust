@@ -15,13 +15,15 @@ int main() {
     } TileType;
 
     typedef struct {
-        TileType tiles[40][60];
+        TileType tiles[8][12];
         int x, y; // global map location
     } Screen;
 
     typedef struct {
         Screen screens[4][4];
     } Map;
+
+    int currentScreenX  = 0, currentScreenY = 0;
 
     InitWindow(800, 450, "dust_to_dust");
     ToggleFullscreen();
@@ -54,4 +56,8 @@ int main() {
     
     CloseWindow();
     return 0;
+}
+
+void initMap(Map* map){
+    for (int screenY = 0; screenY < 4; screenY++)
 }
