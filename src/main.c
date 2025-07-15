@@ -1,10 +1,7 @@
 #include <raylib.h>
-
-int main() {
-
-    typedef struct {
-        int x, y, health;
-    } Player;
+#include <stdio.h>
+#include <stdlib.h>
+#include <dirent.h>
 
     typedef enum {
         TILE_GRASS,
@@ -23,7 +20,40 @@ int main() {
         Screen screens[4][4];
     } Map;
 
-    int currentScreenX  = 0, currentScreenY = 0;
+    typedef struct {
+        int x, y, health;
+    } Player;
+
+Map* initMap(){
+    // make a map, by making each individual screen via files in the /maps directory.
+    // each file is a  grid of numbers. so we'll get each file, and read the contents
+    // into the 'screens'. ez pz
+    
+    Map* map = malloc(sizeof(Map));
+//    Screen screen  = {0};
+
+    struct dirent *de; // pointer to directory entry
+    DIR  *dr = opendir("../maps/");
+
+    if (dr == NULL) {
+        printf("could not open maps directory for file loading");
+        return map;
+    }
+
+    while ((de = readdir(dr)) != NULL)
+            printf("%s\n", de->d_name);
+
+    closedir(dr);    
+    return map;
+}
+
+
+int main() {
+    
+    Map* map = initMap();
+    if (!map) {
+        return 0;
+    }
 
     InitWindow(800, 450, "dust_to_dust");
     ToggleFullscreen();
@@ -58,6 +88,3 @@ int main() {
     return 0;
 }
 
-void initMap(Map* map){
-    for (int screenY = 0; screenY < 4; screenY++)
-}
