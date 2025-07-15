@@ -6,6 +6,23 @@ int main() {
         int x, y, health;
     } Player;
 
+    typedef enum {
+        TILE_GRASS,
+        TILE_WATER,
+        TILE_BRICK,
+        TILE_NPC,
+        TILE_GOBLIN,
+    } TileType;
+
+    typedef struct {
+        TileType tiles[40][60];
+        int x, y; // global map location
+    } Screen;
+
+    typedef struct {
+        Screen screens[4][4];
+    } Map;
+
     InitWindow(800, 450, "dust_to_dust");
     ToggleFullscreen();
     int scrWidth = GetScreenWidth();
